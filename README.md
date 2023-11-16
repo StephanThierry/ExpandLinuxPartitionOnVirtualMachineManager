@@ -67,7 +67,7 @@ You should see something like this:
 ```
   Filesystem                         Size  Used Avail Use% Mounted on
   tmpfs                              297M  8.5M  289M   3% /run
-  /dev/mapper/ubuntu--vg-ubuntu--lv    8G  7.7G  9.5G  92% /
+  /dev/mapper/ubuntu--vg-ubuntu--lv    8G  7.7G  0.3G  96% /
   tmpfs                              1.5G     0  1.5G   0% /dev/shm
   tmpfs                              5.0M     0  5.0M   0% /run/lock
   tmpfs                              1.5G     0  1.5G   0% /run/qemu
@@ -80,3 +80,13 @@ Look for the filesystem mounted on `/` - in this case `/dev/mapper/ubuntu--vg-ub
 
 * Run `df -h` again and you should now see that the filesystem has been expanded to use the full available size.
 
+```
+	Filesystem                         Size  Used Avail Use% Mounted on
+	tmpfs                              297M  8.5M  289M   3% /run
+	/dev/mapper/ubuntu--vg-ubuntu--lv   18G  7.7G  9.5G  45% /
+	tmpfs                              1.5G     0  1.5G   0% /dev/shm
+	tmpfs                              5.0M     0  5.0M   0% /run/lock
+	tmpfs                              1.5G     0  1.5G   0% /run/qemu
+	/dev/sda2                          1.7G  129M  1.5G   8% /boot
+	tmpfs                              297M  4.0K  297M   1% /run/user/1000
+```
