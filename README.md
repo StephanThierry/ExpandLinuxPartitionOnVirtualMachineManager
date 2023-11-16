@@ -1,14 +1,14 @@
 # Expand Linux Partition On VM in Synology Virtual Machine Manager
 How to Expand a Linux (Ubuntu) Partition On a VM in the Synology Virtual Machine Manager
 
-**Making the space available to the OS:**
+## Making the space available to the OS
 1. Login to DSM and goto Virtual Machine Manager  
 1. Select "Virtual Machine" and select the Virtual Machine  
 1. At the top select [Action] - Edit  
 1. In the "Edit Virtual Machine"-window select the "Storage"-tab  
 1. Set the size in GB of the Partition you want to increase - for example: "Virtual Disk 1" from 10 to 20 GB  
   
-**Using the space in the OS:**  
+## Using the space in the OS  
 * Login to the instance as your admin account using a terminal emulator. (For example Putty)
 * Use command:  
 `sudo lsblk`
@@ -29,9 +29,9 @@ You should now see something like this:
 	sr0                        11:0    1  1024M  0 rom
 	sr1                        11:1    1  47.4M  0 rom
 ```
-Notice! The "sda"-drive is expanded to 20GB but the space is not yet fully used by the partitions.
+Notice! The "sda"-drive is expanded to 20GB but the space is not yet fully used by the partitions - the numbers still add up to 10.
 
-Lets assume the partition we want to expand is the one mounted to "/" - so that would be "ubuntu--vg-ubuntu--lv" of type "lvm" - Logical volume manager  
+Lets assume the partition we want to expand is the one mounted to ´/´ - so that would be "ubuntu--vg-ubuntu--lv" of type "lvm" (Logical volume manager)  
 
 * Type command:  
 `sudo growpart /dev/sda 3` - meaning the 3rd partition of "sda"
@@ -59,7 +59,7 @@ You should see something like:
 	Block device           253:0
 ```
 
-* Look for "LV path" and use that to form this command to extend the volume:  
+* Look for `LV path` and use that to form this command to extend the volume:  
 `lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv`
 * You now need to expand the filesystem - so you need the filesystem path. Type command:  
 `df -h`
@@ -75,10 +75,10 @@ You should see something like this:
 	tmpfs                              297M  4.0K  297M   1% /run/user/1000
 ```
 
-Look for the filesystem mounted on `/` - in this case `/dev/mapper/ubuntu--vg-ubuntu--lv` and use that referance in this command:   
+Look for the filesystem mounted on `/` - in this case `/dev/mapper/ubuntu--vg-ubuntu--lv` and use that in this command:   
 `sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv`  
 
-* Run `df -h` again and you should now see that the filesystem has been expanded to use the full available size.
+* Run `df -h` again and you should now see the filesystem has been expanded to use the full size of the partition.
 
 ```
 	Filesystem                         Size  Used Avail Use% Mounted on
