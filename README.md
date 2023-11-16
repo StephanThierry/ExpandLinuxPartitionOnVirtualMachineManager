@@ -10,7 +10,8 @@ How to Expand a Linux (Ubuntu) Partition On a VM in the Synology Virtual Machine
   
 **Using the space in the OS:**  
 * Login to the instance as your admin account using a terminal emulator. (For example Putty)
-* Use command: `sudo lsblk`
+* Use command:
+`sudo lsblk`
 
 You should now see something like this:  
 ```
@@ -32,9 +33,11 @@ Notice! The "sda"-drive is expanded to 20GB but the space is not yet fully used 
 
 Lets assume the partition we want to expand is the one mounted to "/" - so that would be "ubuntu--vg-ubuntu--lv" of type "lvm" - Logical volume manager  
 
-* Type command: `sudo growpart /dev/sda 3` - meaning the 3rd partition of "sda"
+* Type command:
+`sudo growpart /dev/sda 3` - meaning the 3rd partition of "sda"
    
-* Type command: `sudo lvdisplay` to get the LV Path of the logical volume
+* Type command:
+`sudo lvdisplay` to get the LV Path of the logical volume
 
 You should see something like:  
 ```
@@ -56,8 +59,10 @@ You should see something like:
 	  Block device           253:0
 ```
 
-* Look for "LV path" and use that to form this command to extend the volume: `lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv`
-* You now need to expand the filesystem - so you need the filesystem path. Type command: `df -h`
+* Look for "LV path" and use that to form this command to extend the volume:
+`lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv`
+* You now need to expand the filesystem - so you need the filesystem path. Type command:
+`df -h`
 You should see something like this:
 ```
   Filesystem                         Size  Used Avail Use% Mounted on
@@ -70,7 +75,8 @@ You should see something like this:
   tmpfs                              297M  4.0K  297M   1% /run/user/1000
 ```
 
-Look for the filesystem mounted on `/` - in this case `/dev/mapper/ubuntu--vg-ubuntu--lv` and use that referance in this command: `sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv`  
+Look for the filesystem mounted on `/` - in this case `/dev/mapper/ubuntu--vg-ubuntu--lv` and use that referance in this command:   
+`sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv`  
 
 * Run `df -h` again and you should now see that the filesystem has been expanded to use the full available size.
 
