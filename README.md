@@ -10,7 +10,7 @@ How to Expand a Linux (Ubuntu) Partition On a VM in the Synology Virtual Machine
   
 **Using the space in the OS:**  
 * Login to the instance as your admin account using a terminal emulator. (For example Putty)
-* Use command:
+* Use command:  
 `sudo lsblk`
 
 You should now see something like this:  
@@ -33,10 +33,10 @@ Notice! The "sda"-drive is expanded to 20GB but the space is not yet fully used 
 
 Lets assume the partition we want to expand is the one mounted to "/" - so that would be "ubuntu--vg-ubuntu--lv" of type "lvm" - Logical volume manager  
 
-* Type command:
+* Type command:  
 `sudo growpart /dev/sda 3` - meaning the 3rd partition of "sda"
    
-* Type command:
+* Type command:  
 `sudo lvdisplay` to get the LV Path of the logical volume
 
 You should see something like:  
@@ -59,9 +59,9 @@ You should see something like:
 	  Block device           253:0
 ```
 
-* Look for "LV path" and use that to form this command to extend the volume:
+* Look for "LV path" and use that to form this command to extend the volume:  
 `lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv`
-* You now need to expand the filesystem - so you need the filesystem path. Type command:
+* You now need to expand the filesystem - so you need the filesystem path. Type command:  
 `df -h`
 You should see something like this:
 ```
