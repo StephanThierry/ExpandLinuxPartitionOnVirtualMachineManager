@@ -41,22 +41,22 @@ Lets assume the partition we want to expand is the one mounted to "/" - so that 
 
 You should see something like:  
 ```
-	  --- Logical volume ---
-	  LV Path                /dev/ubuntu-vg/ubuntu-lv
-	  LV Name                ubuntu-lv
-	  VG Name                ubuntu-vg
-	  LV UUID                vCsYuG-wvCf-pDGd-omCG-LJ94-Y3ck-p1EtDM
-	  LV Write Access        read/write
-	  LV Creation host, time ubuntu-server, 2023-06-08 15:01:13 +0000
-	  LV Status              available
-	  # open                 1
-	  LV Size                <18.25 GiB
-	  Current LE             4671
-	  Segments               1
-	  Allocation             inherit
-	  Read ahead sectors     auto
-	  - currently set to     256
-	  Block device           253:0
+	--- Logical volume ---
+	LV Path                /dev/ubuntu-vg/ubuntu-lv
+	LV Name                ubuntu-lv
+	VG Name                ubuntu-vg
+	LV UUID                vCsYuG-wvCf-pDGd-omCG-LJ94-Y3ck-p1EtDM
+	LV Write Access        read/write
+	LV Creation host, time ubuntu-server, 2023-06-08 15:01:13 +0000
+	LV Status              available
+	# open                 1
+	LV Size                <18.25 GiB
+	Current LE             4671
+	Segments               1
+	Allocation             inherit
+	Read ahead sectors     auto
+	- currently set to     256
+	Block device           253:0
 ```
 
 * Look for "LV path" and use that to form this command to extend the volume:  
@@ -65,14 +65,14 @@ You should see something like:
 `df -h`
 You should see something like this:
 ```
-  Filesystem                         Size  Used Avail Use% Mounted on
-  tmpfs                              297M  8.5M  289M   3% /run
-  /dev/mapper/ubuntu--vg-ubuntu--lv    8G  7.7G  0.3G  96% /
-  tmpfs                              1.5G     0  1.5G   0% /dev/shm
-  tmpfs                              5.0M     0  5.0M   0% /run/lock
-  tmpfs                              1.5G     0  1.5G   0% /run/qemu
-  /dev/sda2                          1.7G  129M  1.5G   8% /boot
-  tmpfs                              297M  4.0K  297M   1% /run/user/1000
+	Filesystem                         Size  Used Avail Use% Mounted on
+	tmpfs                              297M  8.5M  289M   3% /run
+	/dev/mapper/ubuntu--vg-ubuntu--lv    8G  7.7G  0.3G  96% /
+	tmpfs                              1.5G     0  1.5G   0% /dev/shm
+	tmpfs                              5.0M     0  5.0M   0% /run/lock
+	tmpfs                              1.5G     0  1.5G   0% /run/qemu
+	/dev/sda2                          1.7G  129M  1.5G   8% /boot
+	tmpfs                              297M  4.0K  297M   1% /run/user/1000
 ```
 
 Look for the filesystem mounted on `/` - in this case `/dev/mapper/ubuntu--vg-ubuntu--lv` and use that referance in this command:   
