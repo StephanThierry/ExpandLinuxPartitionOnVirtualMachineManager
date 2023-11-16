@@ -34,7 +34,7 @@ Notice! The "sda"-drive is expanded to 20GB but the space is not yet fully used 
 Lets assume the partition we want to expand is the one mounted to `/` - so that would be "ubuntu--vg-ubuntu--lv" of type "lvm" (Logical volume manager)  
 
 * Type command:  
-`sudo growpart /dev/sda 3` - meaning the 3rd partition of "sda"
+`sudo growpart /dev/sda 3` - meaning the 3rd partition of "sda" (Yes, there is a "space" between "sda" and "3")
    
 * Type command:  
 `sudo lvdisplay` to get the LV Path of the logical volume
